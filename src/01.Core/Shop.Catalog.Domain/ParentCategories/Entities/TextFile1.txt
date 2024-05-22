@@ -1,0 +1,1 @@
+﻿Defin Navication Class with Drive from Entity

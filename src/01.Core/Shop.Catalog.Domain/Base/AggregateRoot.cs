@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Catalog.Domain.ParentCategory.Entities
+namespace Shop.Catalog.Domain.Base
 {
-    internal class ParentCategory
+    public abstract class AggregateRoot<T> : Entity<T>
     {
     }
 }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Shop.Catalog.Domain.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Catalog.Domain.ParentCategory.ValueObjects
+namespace Shop.Catalog.Domain.Categories.ValueObjects
 {
     public class Description : ValueObject
     {
@@ -16,10 +17,7 @@ namespace Shop.Catalog.Domain.ParentCategory.ValueObjects
 
         public string Value { get; private set; }
 
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
+
 
         private static void ValidateDescription(string description)
         {
@@ -27,7 +25,7 @@ namespace Shop.Catalog.Domain.ParentCategory.ValueObjects
             {
                 if (description.Length > 600)
                 {
-                    throw new BusinessException(ExceptionMessages.InvalidLength);
+                    // throw new BusinessException(ExceptionMessages.InvalidLength);
                 }
             }
         }

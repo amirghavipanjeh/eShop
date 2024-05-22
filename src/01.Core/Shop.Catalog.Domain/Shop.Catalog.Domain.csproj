@@ -7,9 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Category\" />
-    <Folder Include="ParentCategory\Exceptions\" />
-    <Folder Include="ParentCategory\Services\" />
+    <Folder Include="ParentCategories\Exceptions\" />
+    <Folder Include="ParentCategories\Services\" />
   </ItemGroup>
 
 </Project>

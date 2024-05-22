@@ -1,18 +1,36 @@
 ﻿using MediatR;
 using Shop.Catalog.Application.Contracts.ParentCategory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shop.Catalog.Domain.Contract;
+using Shop.Catalog.Domain.Contracts;
+using Shop.Catalog.Domain.ParentCategories.ValueObjects;
 
 namespace Shop.Catalog.Application.ParentCategory
 {
-    internal class CreateParentCategoryCommandHandler : IRequestHandler<CreateParentCategoryCommand>
+    internal class CreateParentCategoryCommandHandler : IRequestHandler<CreateParentCategoryCommand, CreateParentCategoryResponse>
     {
-        public Task Handle(CreateParentCategoryCommand request, CancellationToken cancellationToken)
+        private readonly IParentCategoryRepository _context;
+        public CreateParentCategoryCommandHandler(IParentCategoryRepository context) : base()
         {
-            throw new NotImplementedException();
+            _context = context;
+
+        }
+
+        public async Task<CreateParentCategoryResponse> Handle(CreateParentCategoryCommand request, CancellationToken cancellationToken)
+        {
+            var name = new Name(request.Name);
+            var description = new Description(request.Description);
+            var parentCategory = Domain.ParentCategories.ParentCategory.Create(name, description, true);
+            await _context.AddAsync(parentCategory);
+
+            var parentCategoryResponce = new CreateParentCategoryResponse()
+            {
+                Id = parentCategory.Id,
+                Name = parentCategory.Name.ToString(),
+                Description = parentCategory.Description.ToString(),
+                IsActive = parentCategory.IsActive
+
+            };
+            return parentCategoryResponce;
         }
     }
 }
